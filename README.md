@@ -1,30 +1,37 @@
- #📘 Elasticsearch with Spring Boot & JPA
-This project demonstrates how to use Elasticsearch alongside Spring Boot + JPA for full-text search functionality while using MySQL (or any RDBMS) for primary data persistence.
+# 🧠 Elasticsearch with Spring Boot and JPA
 
-## 🛠 Tech Stack
-Spring Boot 3.x
+This project demonstrates how to combine **Elasticsearch** with **Spring Boot + JPA** to get the best of both worlds: relational data storage and powerful full-text search.
 
-Spring Data JPA (MySQL)
+---
 
-Spring Data Elasticsearch
+## 🔄 Use Case Comparison: JPA vs Elasticsearch
 
-Elasticsearch 8.x (via Docker)
+| Use Case                          | JPA                             | Elasticsearch                  |
+|----------------------------------|----------------------------------|--------------------------------|
+| Store structured data (relations)| ✅ Yes                          | ❌ No                           |
+| Full-text search                 | ❌ Poor performance             | ✅ Yes                          |
+| Filtering and joins              | ✅ Efficient with relations     | ❌ Not suitable                 |
+| Autocomplete, fuzzy search       | ❌ No                           | ✅ Yes                          |
+| Analytics and aggregation        | ❌ Complex                      | ✅ Fast                         |
 
-Docker 
+---
 
-## 🚀 Use Cases of Elasticsearch with JPA
+## 🔍 Best Practice:
 
+Use **JPA** for:
+- Structured data
+- Relationships
+- Transactions
 
-Use Case                           JPA                        	Elasticsearch
-Store structured data (relations)  ✅ Yes                     	❌ No
-Full-text search	                 ❌ Poor performance          ✅ Yes
-Filtering and joins                ✅ Efficient with relations	❌ Not suitable
-Autocomplete, fuzzy search	       ❌ No	                      ✅ Yes
-Analytics and aggregation	         ❌ Complex                 	✅ Fast
+Use **Elasticsearch** for:
+- Full-text search
+- Autocomplete
+- Filtering and scoring
+- Analytics
 
-🔍 Best Practice:
+---
 
+## 🐳 Run Elasticsearch with Docker (No Docker Compose)
 
-Use JPA (MySQL) for CRUD, joins, transactions
-Use Elasticsearch for search, suggestions, and text queries
-
+```bash
+docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" docker.elastic.co/elasticsearch/elasticsearch:8.12.2
